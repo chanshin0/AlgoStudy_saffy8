@@ -1,5 +1,5 @@
 ### Hi there 👋
-- 2022.0808 ~ 
+- 2022.08.08 ~ 
 - 🌱 I’m currently learning python
 - 👯 I’m looking to collaborate on ssafy
 
