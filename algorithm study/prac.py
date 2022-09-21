@@ -1,5 +1,4 @@
-a = 'abcd'
-b = ['a','b']
-a = a.rstrip('d')
-
-print(ord('b'))
+a = [[1,2],[3,4]]
+b = 0
+c = a[b:]+a[:b]
+print(c)
