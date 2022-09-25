@@ -3,18 +3,23 @@ import sys
 T = int(sys.stdin.readline().strip())
 for tc in range(T):
     N = int(sys.stdin.readline().strip())
-    applicants= [[] for _ in range(N)]
-    for n in range(N):
+    paper = [0]*(N+1)
+    interview = [0]*(N+1)
+    for n in range(1, N+1):
         sco1, sco2 = map(int, sys.stdin.readline().split())
-        applicants[n] = [sco1, sco2]
+        paper[n] = sco1
+        interview[n] = sco2
 
-    kill = [0]*N
-    for i, j in applicants:
-        for vi, vj in applicants:
-            cnt = 0
-            if [i, j] != [vi,vj]:
-                if i > vi and j > vj:
-                    kill[applicants.index([i, j])] += 1
-                    break
+    ans = N
+    for i in range(1, N):
+        a = paper.index(max(paper[1:]))
+        if interview[a] != 1:
+            ans -= 1
+            paper[a] = 0
+            interview[a] = 0
+        else:
+            paper[a] = 0
+            interview[a] = 0
+    print(ans)
 
-    print(kill.count(0))
+
