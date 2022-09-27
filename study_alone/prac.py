@@ -1,2 +1,2 @@
-a = [1,2,3]
-print(list(range(3,3)))
+a = [[1,2]]
+print(tuple(a[0]))
