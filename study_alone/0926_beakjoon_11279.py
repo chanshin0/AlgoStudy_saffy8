@@ -12,4 +12,5 @@ for tc in range(T):
             print(0)
     else:
         if arr:
+            pass
             
