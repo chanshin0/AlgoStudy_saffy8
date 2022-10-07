@@ -1,2 +1,2 @@
-a = [[1,2]]
-print(tuple(a[0]))
+a = -1
+print(bool(a))
