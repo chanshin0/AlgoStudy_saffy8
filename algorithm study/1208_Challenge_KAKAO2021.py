@@ -12,21 +12,22 @@ def dijk(s, N, visited, costs, INF, adjM):
     # [pyjune의 전술노트 복습]
     costs[s] = 0                                        # 1. 시작정점의 최소비용은 0
 
-    for _ in range(N - 1):                              # 2. 시작정점을 제외한 N-1개의 정점에 대한 최소비용을 구할 것이다.
-        u = 0                                               # 2-1. 현재 최소비용이 결정된 정점 u를 찾을 것이다.
+    for _ in range(N - 1):                              # 2. 시작정점(최소비용이 0으로 이미 결정됨)을 제외한 나머지 N-1개의 정점에 대한 최소비용을 구할 것이다.
+        u = 0                                               # 2-1. 최소비용이 확정된 정점 u를 거점으로 하여 찾을 것이다.
         minV = INF
         for i in range(1, N + 1):                           # 2-2. 모든 정점을 돌면서
-            if costs[i] < minV and not visited[i]:          # 2-3. 최소비용이 갱신된 것 중에 가장 작은 u를 선택
+            if costs[i] < minV and not visited[i]:          # 2-3. 이전for문에 갱신된 최소비용이 가장 작은 u를 선택
                 u = i
                 minV = costs[i]
 
-        visited[u] = 1                                  # 3. 다음 for문에 얘 안 고르게 방문 처리
+        visited[u] = 1                                  # 3. 선택한 정점 u는 최소비용이 결정되었음. 방문처리.
 
-        for i in range(1, N + 1):
-            if adjM[u][i] != 0:                         # 4. 정점 u와 i 사이에 간선이 있을 때
-                if costs[i] > costs[u] + adjM[u][i]:        # 4-1. 정점 i의 최소비용 갱신시도
+        for i in range(1, N + 1):                       # 4. 이 거점 u에서 다시 모든 정점을 돌며
+            if adjM[u][i] != 0 and not visited[i]:          # 4-1. 정점 u와 i 사이에 간선이 있고, 최소비용이 아직 확정되지 않은 정점 i일 때,
+                if costs[i] > costs[u] + adjM[u][i]:        # 4-2. 정점 i의 최소비용 갱신을 시도한다.
                     costs[i] = costs[u] + adjM[u][i]
 
+                                                        # 5. N-1번 반복하면 시작정점으로부터 모든 정점의 최소비용이 결정됨
 
 def solution(n, s, a, b, fares):
 
@@ -54,16 +55,13 @@ def solution(n, s, a, b, fares):
     print(costs_a)
     print(costs_b)
 
-    points = []                                         # [생각 2]. 합승을 시도할 수 있는 기준점은 모든 정점에서 '시작 정점 s 그리고, s와 연결되지 않은 정점들'을 제외한 나머지 정점들이다.
+    answer = INF                                        # [생각 2]. 합승을 시도할 수 있는 기준점은 모든 정점에서 '시작 정점 s 그리고, s와 연결되지 않은 정점들'을 제외한 나머지 정점들이다.
     for i in range(1, n + 1):
         if i != s and costs[i] != INF:
-            points.append(i)
-
-    answer = INF                                        # [생각 3]. 최소합승비용 == costs[point] + costs_b[point] + costs_a[point]이다.
-    for point in points:
-        temp = costs[point] + costs_b[point] + costs_a[point]
-        if temp < answer:
-            answer = temp
+            temp = costs[i] + costs_b[i] + costs_a[i]
+                                                        # [생각 3]. 합승을 시도할 어떤 거점 i에 대한 최소합승비용 == costs[i] + costs_b[i] + costs_a[i]이다.
+            if temp < answer:
+                answer = temp
 
     if costs[a] + costs[b] < answer:                    # [생각 4]. 마지막으로 합승을 하지 않는 경우와 비교해 준다.
         answer = costs[a] + costs[b]
