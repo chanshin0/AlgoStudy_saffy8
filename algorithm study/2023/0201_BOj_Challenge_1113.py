@@ -29,7 +29,7 @@ for i in range(N):
             wall.append((i,j))
 
 # A = (ni,nj)
-# 1. A가 나보다 큼  : A가 벽이든 아니든 물을 넣을 수 있음
+# 1. A가 나보다 큼  : A가 벽이든 아니든 물을 넣을 수 있음. but wall
 # 2. A가 작거나 같음 : A가 벽이면 X, A가 벽이 아니면 넣을 수 있음
 # 3. 4방향 델타중에 한번이라도 X가 있으면 벽으로 취급함.
 from collections import deque
