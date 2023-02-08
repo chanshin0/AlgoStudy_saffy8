@@ -6,7 +6,6 @@
 94449
 88888
 '''
-
 # 수영장 만들기
 N, M = map(int, input().split())
 area = [list(map(int, input())) for _ in range(N)]
@@ -57,5 +56,5 @@ while que:
         wall.append((ki,kj))
 
 print(water)
-# for i in range(N):
-#     print(area[i])
+for i in range(N):
+    print(area[i])
