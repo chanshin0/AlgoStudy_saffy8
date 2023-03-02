@@ -17,7 +17,7 @@ while que:
         else:
             # 멀티탭에 꽂히지 않은 애 차례면 누굴 뽑을지 정해야함
             priority = [0]*len(multitap)
-            for i in range(len(multitap)):
+            for i in range(len(multitap)-1,-1,-1):
                 if multitap[i] in que:
                     priority[i] += 1
             target = priority.index(min(priority))
