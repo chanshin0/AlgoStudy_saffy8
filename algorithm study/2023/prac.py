@@ -1,16 +1,14 @@
-n = int(input())
-arr = list(map(int, input().split()))
+keys = input()
+password = input()
 
-arr.sort()
+answer = 1
+l = len(password)
+num_keys = len(keys)
 
-cnt = 0
-for i in range(2, n):
-    if arr[i] < 2:
-        continue
+for i, char in enumerate(password):
+    position = keys.index(char)
+    answer += position * (num_keys ** (l - 1 - i))
 
-    for j in range(i):
-        if arr[i] - arr[j] in arr[:i]:
-            cnt += 1
-            break
+answer += sum((num_keys ** i - 1) // (num_keys - 1) for i in range(1, l))
 
-print(cnt)
+print(answer)
